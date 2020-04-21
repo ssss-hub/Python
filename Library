@@ -54,7 +54,6 @@ def Get_HTML_Content(URL):
 	
 	time.sleep(3)
 	data=requests.get(URL)
-	#data.encoding = data.apparent_encoding
 	return BeautifulSoup(data.content,'html.parser')
 
 def Get_HTML_Text(URL):
@@ -64,7 +63,6 @@ def Get_HTML_Text(URL):
 	
 	time.sleep(3)
 	data=requests.get(URL)
-	#data.encoding = data.apparent_encoding
 	return BeautifulSoup(data.text,'html.parser')
 
 def Copy_Photo(photo_name):
@@ -86,7 +84,7 @@ def Add_Text_To_Photo(siori_name,text):
 	while text != "":
 		tmp=tmp + Left(text,20) + "\n"
 		text=text[20:]
-#	try:
+	
 	if os.path.exists(siori_name):
 		img=Image.open(siori_name)
 	else:
@@ -97,8 +95,6 @@ def Add_Text_To_Photo(siori_name,text):
 	
 	draw.text((20, 80), tmp, fill=(0, 0, 0), font=font)
 	img.save(siori_name)
-#	except:
-#		pass
 
 def Get_Files_Name_List_From_Folder(folder_name):
 	import glob
@@ -122,8 +118,7 @@ def Download_Video(URL,folder_name,file_name='%(title)s'):
 	import sys, os
 	import datetime
 	
-	ydl_opts = {'outtmpl':file_name + '.%(ext)s','format':'best'}
-#	ydl_opts = {'outtmpl':file_name + '.%(ext)s','format':'bestvideo[ext=mp4]+bestaudio[ext=m4a]','--merge-output-format':'mkv'}
+	ydl_opts = {'outtmpl':file_name + '.%(ext)s','format':'bestvideo[ext=mp4]+bestaudio[ext=m4a]','--merge-output-format':'mkv'}
 	
 	os.makedirs(folder_name,exist_ok=True)
 	before_folder=os.getcwd()
@@ -133,7 +128,3 @@ def Download_Video(URL,folder_name,file_name='%(title)s'):
 		result=ydl.extract_info(URL,download=True)
 	
 	os.chdir(before_folder)
-
-
-#Download_Video('https://www.youtube.com/watch?v=xdHptgDUbsg','tmp')
-#youtube-dl -f bestvideo+bestaudio --merge-output-format mp4 https://www.youtube.com/watch?v=xdHptgDUbsg
