@@ -128,3 +128,19 @@ def Download_Video(URL,folder_name,file_name='%(title)s'):
 		result=ydl.extract_info(URL,download=True)
 	
 	os.chdir(before_folder)
+
+def Test():
+	import wx
+	
+	application = wx.App()
+	
+	frame = wx.Frame(None, wx.ID_ANY, 'りーたん', pos=(300, 300))
+	# 中央へ表示する場合
+	frame.Centre()
+	frame.CreateStatusBar()
+	frame.SetStatusText('りーたん！！！！！！')
+	frame.Show()
+	
+	application.MainLoop()
+
+Test()
